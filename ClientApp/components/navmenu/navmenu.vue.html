@@ -1,0 +1,58 @@
+<template>
+    <!--
+        How to update Bootstrap
+        npm install popper.js --save-dep
+        npm install bootstrap@4 --save
+
+        Making a Collapsible Sidebar Nav in Bootstrap 4?
+        https://stackoverflow.com/questions/49567085/making-a-collapsible-sidebar-nav-in-bootstrap-4
+
+        Bootstrap Sidebar
+        https://bootstrapious.com/p/bootstrap-sidebar
+
+        Router link support
+        https://bootstrap-vue.js.org/docs/reference/router-links/
+    -->
+    <div id="sidebar" class="col d-md-flex bg-dark h-100 w-75 p-0">
+        <ul class="nav flex-column flex-nowrap">
+            <li class="nav-item">
+                <b-link to="/" class="nav-link" exact>
+                    <i class="fas fa-home fa-2x fa-fw"></i> Home
+                </b-link>
+            </li>
+            <li class="nav-item">
+                <b-link to="/counter" class="nav-link">
+                    <i class="fas fa-graduation-cap fa-2x fa-fw"></i> Counter
+                </b-link>
+            </li>
+            <li class="nav-item">
+                <b-link to="/fetchdata" class="nav-link">
+                    <i class="fas fa-sync fa-2x fa-fw"></i> Fetch data
+                </b-link>
+            </li>
+            <li class="nav-item">
+                <b-link to="/sample" class="nav-link">
+                    <i class="fas fa-hammer fa-2x fa-fw"></i> Sample
+                </b-link>
+            </li>
+            <li class="nav-item">
+                <b-link to="/todos" class="nav-link">
+                    <i class="fas fa-list fa-2x fa-fw"></i> Todo
+                </b-link>
+            </li>
+            <li class="nav-item">
+                <b-link to="/heroes" class="nav-link">
+                    <i class="fas fa-clipboard-list fa-2x fa-fw"></i> HeroList
+                </b-link>
+            </li>
+            <li class="nav-item">
+                <b-link to="/coindesk" class="nav-link">
+                    <i class="fas fa-clipboard-list fa-2x fa-fw"></i> CoinDesk
+                </b-link>
+            </li>
+        </ul>
+    </div>
+
+</template>
+
+<style src="./navmenu.css" />

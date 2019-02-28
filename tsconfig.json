@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": ["es2016", "es2017", "dom"],  // added
+    "sourceMap": true,
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "types": ["webpack-env"],
+    "strictPropertyInitialization": false, // added
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "useWebpackText": true,
+    "useCache": true,
+    "useTranspileModule": true
+  },
+  //"include" : [ "**/*.ts", "**/*.vue" ],
+  "exclude": [
+      "bin",
+      "node_modules"
+  ]
+}

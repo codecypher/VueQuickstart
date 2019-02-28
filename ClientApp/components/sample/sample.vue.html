@@ -1,0 +1,32 @@
+<template>
+    <div>
+        <h1>Sample</h1>
+
+        <p>This is a simple example of a Vue.js component.</p>
+
+        <hello-component name="Jeff" :initialEnthusiasm="5"></hello-component>
+
+        <hello-greeting name="Jeff" :initialEnthusiasm="3"></hello-greeting>
+
+        <b-btn v-b-modal.modal1>Launch demo modal</b-btn>
+
+        <!-- Modal Component -->
+        <b-modal id="modal1" title="Bootstrap-Vue">
+            <p class="my-4">Hello from modal!</p>
+        </b-modal>
+
+
+        <b-alert variant="danger"
+                 dismissible
+                 :show="showDismissibleAlert"
+                 @dismissed="showDismissibleAlert=false">
+            Dismissible Alert!
+        </b-alert>
+
+        <b-btn @click="showDismissibleAlert=true" variant="info" class="m-1">
+            Show dismissible alert ({{showDismissibleAlert?'visible':'hidden'}})
+        </b-btn>
+    </div>
+</template>
+
+<script src="./sample.ts"></script>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="description" content="">
+
+    <title>@ViewData["Title"] - Quickstart</title>
+
+    <base href="~/" />
+
+    @*
+        How to set up a full-stack .NET web development environment on Mac OS
+        https://codeburst.io/how-to-set-up-a-modern-full-stack-net-web-development-environment-on-mac-os-542dcd43a564
+
+        How to update Bootstrap
+        https://stackoverflow.com/questions/47985337/how-to-update-bootstrap-v3-3-7-to-v4-0-0-beta2-in-asp-net-core-2-0-mvc-project
+
+        Typscript Error: TS2709
+        https://github.com/vuejs/vue-router/issues/960
+        Fix by changing the way you import Vue in both vue.d.ts and router.d.ts:
+            // Replace this
+            import vue = require('vue')
+            // with this
+            import Vue from 'vue'
+    *@
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/dist/site.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    @RenderBody()
+
+    @*
+        <environment include="Development">
+            <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        </environment>
+
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+            <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.js"></script>
+        </environment>
+    *@
+
+    <script src="~/dist/vendor.js" asp-append-version="true"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
