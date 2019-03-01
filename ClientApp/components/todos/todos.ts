@@ -1,5 +1,9 @@
 ﻿// Modern Web Development using ASP.NET Core template, Vue.js and Webpack
 // https://www.dotnetcurry.com/aspnet/1383/modern-web-dev-aspnet-core-webpack-vuejs
+// https://github.com/DaniJG/AspCoreVue
+//
+// Let’s implement the classical example of the TODO list, where we will add a 
+// new client-side route and components, backed by a REST API on the server side.
 
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';

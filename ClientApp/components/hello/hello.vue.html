@@ -1,9 +1,24 @@
 ﻿<template>
     <div>
-        <div class="greeting">Hello {{name}}{{exclamationMarks}}</div>
+        <div class="greeting">Hello {{name}}{{exclamationMarks}} {{count}}</div>
+
         <button @click="decrement">-</button>
         <button @click="increment">+</button>
+
         <hello-greeting></hello-greeting>
+
+        <!-- Slot example -->
+        <div class="container">
+            <header>
+                <slot name="header"></slot>
+            </header>
+            <main>
+                <slot></slot>
+            </main>
+            <footer>
+                <slot name="footer"></slot>
+            </footer>
+        </div>
     </div>
 </template>
 

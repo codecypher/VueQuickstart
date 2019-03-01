@@ -6,6 +6,7 @@
 export default class HelloComponent extends Vue {
     @Prop() name!: string;
     @Prop() initialEnthusiasm!: number;
+    @Prop() count!: number;
 
     //name: string = "World";
     //initialEnthusiasm: number = 3;
@@ -20,12 +21,14 @@ export default class HelloComponent extends Vue {
     increment() {
         this.enthusiasm++;
     }
+
     decrement() {
         if (this.enthusiasm > 1) {
             this.enthusiasm--;
         }
     }
 
+    // Computed property
     get exclamationMarks(): string {
         return Array(this.enthusiasm + 1).join('!');
     }
