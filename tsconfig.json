@@ -4,11 +4,11 @@
     "module": "es2015",
     "moduleResolution": "node",
     "target": "es5",
-    "lib": ["es2016", "es2017", "dom"],  // added
+    "lib": [ "es2016", "es2017", "dom" ], // added
     "sourceMap": true,
     "skipDefaultLibCheck": true,
     "strict": true,
-    "types": ["webpack-env"],
+    "types": [ "webpack-env" ],
     "strictPropertyInitialization": false, // added
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -22,7 +22,7 @@
   },
   //"include" : [ "**/*.ts", "**/*.vue" ],
   "exclude": [
-      "bin",
-      "node_modules"
+    "bin",
+    "node_modules"
   ]
 }
