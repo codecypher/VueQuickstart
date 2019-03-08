@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Quickstart.Models
+namespace VueQuickstart.Models
 {
     public class Hero
     {

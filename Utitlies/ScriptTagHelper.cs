@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quickstart.TagHelpers
+namespace VueQuickstart.TagHelpers
 {
     // Javascript in a View Component
     // https://stackoverflow.com/questions/44511334/javascript-in-a-view-component/45292644#45292644

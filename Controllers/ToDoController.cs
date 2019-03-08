@@ -4,9 +4,9 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Quickstart.Models;
+using VueQuickstart.Models;
 
-namespace Quickstart.Controllers
+namespace VueQuickstart.Controllers
 {
     // Modern Web Development using ASP.NET Core template, Vue.js and Webpack
     // https://www.dotnetcurry.com/aspnet/1383/modern-web-dev-aspnet-core-webpack-vuejs

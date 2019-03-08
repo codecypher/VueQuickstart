@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Quickstart.Models
+namespace VueQuickstart.Models
 {
     public class Todo
     {

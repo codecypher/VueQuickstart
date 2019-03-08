@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Quickstart.Models;
+using VueQuickstart.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace Quickstart.Controllers
+namespace VueQuickstart.Controllers
 {
     [Route("api/[controller]")]
     public class HeroController : Controller
