@@ -4,7 +4,7 @@ const router = express.Router();
 const heroService = require('./hero.service');
 
 router.get('/heroes', (req, res) => {
-  console.log("routes call to getHeroes")
+    console.log("routes call to getHeroes");
   heroService.getHeroes(req, res);
 });
 
