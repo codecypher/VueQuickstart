@@ -77,7 +77,7 @@ jobs:
     - task: ArchiveFiles@2
       displayName: 'Archive pipeline'
       inputs:
-        rootFolderOrFile: ${{parameters.WorkingDirectory}}/dist
+        rootFolderOrFile: ${{parameters.WorkingDirectory}}/dist/*
         archiveFile: $(Build.ArtifactStagingDirectory)/VueClient.zip
 
     - task: PublishBuildArtifacts@1
