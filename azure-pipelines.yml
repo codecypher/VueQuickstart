@@ -1,0 +1,17 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger:
+- ticket/2259-2
+#- master
+#- azure-pipelines
+
+# name does not update assembly file version properties
+#name: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+#name: $(ReleaseNumber).$(Build.BuildId)
+
+jobs:
+- template: pipeline/vueclient.yml
+- template: pipeline/webapi.yml

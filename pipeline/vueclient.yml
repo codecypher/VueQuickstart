@@ -1,0 +1,88 @@
+parameters:
+  BuildPlatform: 'x64'
+  BuildConfiguration: 'Release'
+  WorkingDirectory: 'VueClient'
+  Solution: 'VueClient/VueClient.njsproj'
+
+jobs:
+- job: 'BuildVueClient'
+
+  pool:
+    #vmImage: 'ubuntu-latest'
+    name: FOTO1
+    demands:
+    - node.js
+    - msbuild
+    - visualstudio
+    - vstest
+
+  steps:
+
+    - script: |
+        echo Build: $(BuildNumber)
+        echo Release: $(ReleaseNumber)
+      displayName: 'Show Variables'
+
+    - task: NodeTool@0
+      displayName: 'Install Node.js'
+      inputs:
+          versionSpec: '10.x'
+
+    - script: |
+        npm install
+      displayName: 'npm install'
+      workingDirectory: ${{parameters.WorkingDirectory}}
+
+    - script: |
+        npm run lint
+      displayName: 'lint project'
+      workingDirectory: ${{parameters.WorkingDirectory}}
+
+    - script: |
+        npm run build
+      displayName: 'Production build'
+      workingDirectory: ${{parameters.WorkingDirectory}}
+
+    # Copy scripts in pipeline directory for use in release
+    - task: CopyFiles@2
+      displayName: 'Copy script Files'
+      inputs:
+        SourceFolder: pipeline
+        Contents: '*.ps1'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+
+    # Update environment variable
+    - task: PowerShell@2
+      displayName: 'Update environment variable'
+      inputs:
+        filePath: 'pipeline/Set-ReleaseDate.ps1'
+        targetType: filePath
+
+    # Replace tokens (environment variables) in file
+    - task: PowerShell@2
+      displayName: 'Replace Tokens'
+      inputs:
+        targetType: filePath
+        filePath: 'pipeline/ReplaceTokens.ps1'
+        arguments: '${{ parameters.WorkingDirectory }}/.env'
+
+    # Copy config files for use in release
+    - task: CopyFiles@2
+      displayName: 'Copy config Files'
+      inputs:
+        SourceFolder: '${{ parameters.WorkingDirectory }}'
+        Contents: '.env'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive pipeline'
+      inputs:
+        rootFolderOrFile: ${{parameters.WorkingDirectory}}/dist
+        archiveFile: $(Build.ArtifactStagingDirectory)/VueClient.zip
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact'
+      inputs:
+        PathtoPublish:  $(Build.ArtifactStagingDirectory)
+        ArtifactName: 'VueClient'
+

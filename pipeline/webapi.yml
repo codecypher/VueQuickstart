@@ -1,0 +1,96 @@
+parameters:
+  BuildPlatform: 'x64'
+  BuildConfiguration: 'Release'
+  WorkingDirectory: 'WebApi'
+  Solution: 'WebApi/WebApi.csproj'
+
+jobs:
+- job: 'BuildWebApi'
+
+  pool:
+    name: Hosted VS2017
+    #name: FOTO1
+    demands:
+    - node.js
+    - msbuild
+    - visualstudio
+    - vstest
+
+  steps:
+
+    - script: |
+        echo Solution: ${{ parameters.Solution }}
+        echo BuildPlatform: ${{ parameters.BuildPlatform }}
+        echo BuildConfiguration: ${{ parameters.BuildConfiguration }}
+        echo Build: $(BuildNumber)
+        echo Release: $(ReleaseNumber)
+      displayName: 'Show Variables'
+
+    - task: NuGetToolInstaller@0
+      displayName: 'Use NuGet 4.4.1'
+      inputs:
+        versionSpec: 4.4.1
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore'
+      inputs:
+        restoreSolution: '${{ parameters.Solution }}'
+        noCache: true
+
+    # Copy scripts in pipeline directory for use in release
+    - task: CopyFiles@2
+      displayName: 'Copy Script Files'
+      inputs:
+        SourceFolder: pipeline
+        Contents: '*.ps1'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+
+    # Copy config files for use in release
+    - task: CopyFiles@2
+      displayName: 'Copy config Files'
+      inputs:
+        SourceFolder: '${{ parameters.WorkingDirectory }}'
+        Contents: 'appsettings.json'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+        
+    - task: PowerShell@2
+      displayName: 'Set Assembly Version'
+      inputs:
+        filePath: '$(Build.ArtifactStagingDirectory)/Set-AssemblyVersion.ps1'
+        targetType: filePath
+        arguments: '$(ReleaseNumber)'
+
+    - task: VSBuild@1
+      displayName: 'Build solution'
+      inputs:
+        solution: '${{ parameters.Solution }}'
+        msbuildArchitecture: x64
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactstagingdirectory)\WebApi.zip" /p:DeployIisAppPath="vuejs-webpi"'
+        platform: '${{ parameters.BuildPlatform }}'
+        configuration: '${{ parameters.BuildConfiguration }}'
+
+  # - task: VSTest@2
+  #   displayName: 'Test Assemblies'
+  #   inputs:
+  #     testAssemblyVer2: |
+  #     **\$({ parameters.BuildConfiguration })\*test*.dll
+  #     !**\obj\**
+  #     platform: '${{ parameters.BuildPlatform }}'
+  #     configuration: '${{ parameters.BuildConfiguration }}'
+
+    - task: PublishSymbols@2
+      displayName: 'Publish symbols path'
+      inputs:
+        SearchPattern: '**\bin\**\*.pdb'
+        PublishSymbols: false
+      continueOnError: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact'
+      inputs:
+        PathtoPublish:  $(Build.ArtifactStagingDirectory)
+        ArtifactName: 'WebApi'
+      condition: succeededOrFailed()
+
+
+
