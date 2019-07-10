@@ -38,10 +38,6 @@ jobs:
       displayName: 'lint project'
       workingDirectory: ${{parameters.WorkingDirectory}}
 
-    - script: |
-        npm run build
-      displayName: 'Production build'
-      workingDirectory: ${{parameters.WorkingDirectory}}
 
     # Copy scripts in pipeline directory for use in release
     - task: CopyFiles@2
@@ -67,12 +63,18 @@ jobs:
         arguments: '${{ parameters.WorkingDirectory }}/.env'
 
     # Copy config files for use in release
-    - task: CopyFiles@2
-      displayName: 'Copy config Files'
-      inputs:
-        SourceFolder: '${{ parameters.WorkingDirectory }}'
-        Contents: '.env'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
+    # - task: CopyFiles@2
+    #   displayName: 'Copy config Files'
+    #   inputs:
+    #     SourceFolder: '${{ parameters.WorkingDirectory }}'
+    #     Contents: '.env'
+    #     TargetFolder: $(Build.ArtifactStagingDirectory)
+
+
+    - script: |
+        npm run build
+      displayName: 'Production build'
+      workingDirectory: ${{parameters.WorkingDirectory}}
 
     - task: ArchiveFiles@2
       displayName: 'Archive pipeline'

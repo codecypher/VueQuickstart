@@ -58,7 +58,8 @@ jobs:
       inputs:
         filePath: '$(Build.ArtifactStagingDirectory)/Set-AssemblyVersion.ps1'
         targetType: filePath
-        arguments: '$(ReleaseNumber)'
+        #arguments: '$(ReleaseNumber)'
+        arguments: '$(BuildNumber)'
 
     - task: VSBuild@1
       displayName: 'Build solution'
